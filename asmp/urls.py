@@ -22,7 +22,7 @@ urlpatterns = [
 ]
 
 urlpatterns+=[
-    path('meetup/',include('meetup.urls'))
+    path('interact/',include('meetup.urls'))
 ]
 
 #urlpatterns+=[
