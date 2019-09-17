@@ -13,8 +13,8 @@ class RegisterForm(forms.Form):
     ch2=[("0","select"),("1","first"),("2","second"),("3","third"),("4","fourth"),("3501","Graduated")]
     curr_year=ChoiceField(choices=ch2,label="Current Year")
     adm_no=CharField(label='Admission No',max_length=8,help_text="enter your id/roll_no")
-    #work_exp=CharField(max_length=1000,widget=Textarea)
-    #contact_no=CharField(max_length=10,help_text="we would love to approach you")
+    password=CharField(max_length=12,widget=PasswordInput,help_text="Set up password to peek in !!")
+    cnf_pass=CharField(max_length=12,widget=PasswordInput,help_text="Reconfirm  your password")
 
     def clean_email(self):
         email=self.cleaned_data['email']
@@ -33,3 +33,34 @@ class RegisterForm(forms.Form):
         if Register_user.objects.filter(roll_no=rno).exists():
             raise ValidationError(_(" the given id is already registered"))
         return rno
+
+    def clean_cnf_pass(self):
+        passw=self.cleaned_data['password']
+        cnf=self.cleaned_data['cnf_pass']
+        if(len(passw)<8):
+            raise ValidationError(_("Password must be atleast 8 characaters long"))
+        if(cnf!=passw):
+            raise ValidationError(_("Please reconfirm your password"))
+            return cnf
+        return passw
+
+class LoginForm(forms.Form):
+    adm_no=CharField(label='Admission No',max_length=8)
+    password=CharField(label='Secret code to enter ',max_length=12,widget=PasswordInput,help_text="Enter your password")
+
+    def clean_adm_no(self):
+        adm=self.cleaned_data['adm_no']
+        if Register_user.objects.filter(roll_no=adm).exists():
+            print(adm)
+            return adm
+        else:
+            raise ValidationError(_("Hey buddy seems like you are not registered"))
+            return adm
+    #def clean_password(self):
+        #adm=self.cleaned_data['adm_no']
+        us=Register_user.objects.get(roll_no=adm)
+        print(us.branch)
+        ps=self.cleaned_data['password']
+        if(ps!=us.password):
+            raise ValidationError(_("Incorrect Password"))
+        return ps
