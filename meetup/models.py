@@ -8,9 +8,9 @@ class Register_user(models.Model):
     last_name=models.CharField(max_length=100)
     branch=models.CharField(max_length=100)
     email=models.EmailField(unique=True)
-    #date=models.DateField(_("Date"),default=datetime.date.today)
     curr_year=models.CharField(max_length=100)
     roll_no=models.CharField(max_length=8,default=None)
+    password=models.CharField(max_length=12,default="")
 
     def __str__(self):
-        return f'{self.first_name},{self.email},{self.field}'
+        return f'{self.first_name},{self.email}'
