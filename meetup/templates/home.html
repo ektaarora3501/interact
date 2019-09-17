@@ -1,11 +1,44 @@
 <html>
 <head>
   <title>
-    Home home-page
+    Home page
   </title>
+  <style>
+  .header{
+    margin-top: 0%;
+    background-color: cyan;
+    height: 50px;
+    width: 100%;
+
+  }
+  .notice{
+    height: 250px;
+    background-color: white;
+
+  }
+
+  .collage{
+    height:400px;
+    background-color:coral;
+  }
+
+  .footer{
+    height: 200px;
+    margin-top: 10%;
+    background-color: yellow;
+  }
+  </style>
 </head>
 <body>
-  this will be the dashboard
-  <a href="{% url 'register' %}">mentor registration</a>
+<div class="header">
+  <a href="{% url 'register' %}">registration</a>
+</div>
+<div class="notice">
+</div>
+<div class="collage">
+  hey there
+</div>
+<div class="footer">
+</div>
 </body>
 </html>
