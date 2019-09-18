@@ -7,4 +7,5 @@ urlpatterns=[
     path('confirm/<user>',views.confirm,name='confirm_regis'),
     path('login',views.login,name='login_user'),
     path('user_dashboard/<user>',views.dashboard,name='user-dashboard'),
+    path('logout',views.logout,name='logout'),
 ]
