@@ -62,6 +62,8 @@ def login(request):
        if form.is_valid():
            print("form valid")
            user=form.cleaned_data['adm_no']
+           request.session['name']=user
+           print("sesssion set!")
            return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
     else:
@@ -78,4 +80,16 @@ def login(request):
 
 
 def dashboard(request,user):
-    return render(request,'dashboard.html',{'user':user,})
+    if request.session.get('name'):
+        return render(request,'dashboard.html',{'user':user,})
+    else:
+        return login(request)
+
+def logout(request):
+    try:
+          del request.session['name']
+          print("user deleted")
+          print(request.session.get('name'))
+    except :
+          pass
+    return  login(request)
