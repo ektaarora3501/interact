@@ -4,7 +4,14 @@
     dashboard
   </title>
 </head>
-<body>
+<script>
+if(!!window.performance && window.performance.navigation.type == 2)
+{
+    window.location.reload();
+}
+  </script>
+<body onunload="">
   hello {{ user }} to your dashboard
+  <a href="{% url 'logout' %}">logout</a>
 </body>
 </html>
