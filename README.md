@@ -7,7 +7,10 @@ To install Django on your local machines use the below link
 
 2. Install MYSQL
  Since the entire database is based on mysql format ,create a mysql server on your machine . To install mysql use the below link:
- [mysql](https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/)
+ [mysql](https://www.digitalocean.com/community/tutorials/how-to-create-a-django-app-and-connect-it-to-a-database)
+ 
+PLEASE NOTE ..
+After creating database as the above step follow the below commands
  
  3.Creating the database
  Login into your mysql user account using command $mysql -u 'user name' -p
