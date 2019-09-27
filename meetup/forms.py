@@ -3,6 +3,7 @@ from meetup.models import Register_user
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from bootstrap_datepicker_plus import DatePickerInput
+import bcrypt
 
 class RegisterForm(forms.Form):
     first_name=CharField(label='First Name',max_length=100)
@@ -47,20 +48,25 @@ class RegisterForm(forms.Form):
 class LoginForm(forms.Form):
     adm_no=CharField(label='Admission No',max_length=8)
     password=CharField(label='Secret code to enter ',max_length=12,widget=PasswordInput,help_text="Enter your password")
-
-    def clean_adm_no(self):
+    def clean_password(self):
         adm=self.cleaned_data['adm_no']
         if Register_user.objects.filter(roll_no=adm).exists():
             print(adm)
-            return adm
         else:
             raise ValidationError(_("Hey buddy seems like you are not registered"))
             return adm
-    #def clean_password(self):
-        #adm=self.cleaned_data['adm_no']
         us=Register_user.objects.get(roll_no=adm)
         print(us.branch)
-        ps=self.cleaned_data['password']
-        if(ps!=us.password):
+        p=self.cleaned_data['password']
+        #p=p.encode('utf-8')
+        #print(type(p))
+        #print(bytes(us.password.decode('utf-8')))
+        #user=bcrypt.hashpw(p,bcrypt.gensalt())
+        #user=(bytes(us.password.encode('utf-8')))
+        #user=user.encode('utf-8')
+        #print(user)
+        #print(type(user))
+        #bcrypt.checkpw(user,user)
+        if(p!=us.password):
             raise ValidationError(_("Incorrect Password"))
-        return ps
+        return p
