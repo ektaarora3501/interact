@@ -10,7 +10,7 @@ class Register_user(models.Model):
     email=models.EmailField(unique=True)
     curr_year=models.CharField(max_length=100)
     roll_no=models.CharField(max_length=8,default=None)
-    password=models.CharField(max_length=12,default="")
+    password=models.CharField(max_length=100,default="")
 
     def __str__(self):
         return f'{self.first_name},{self.email}'
