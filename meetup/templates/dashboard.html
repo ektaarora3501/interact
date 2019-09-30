@@ -90,7 +90,7 @@ position: static;
 <div class="sidebar">
   <br>
   <a href=" {% url 'home' %}">Home</a>
-  <a href="">Set Profile</a>
+  <a href="{% url 'user-profile' user %}">Set Profile</a>
   <a href=" {% url 'logout' %}">logout</a>
 </div>
 <div class="content">
