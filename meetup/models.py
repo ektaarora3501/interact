@@ -10,7 +10,13 @@ class Register_user(models.Model):
     email=models.EmailField(unique=True)
     curr_year=models.CharField(max_length=100)
     roll_no=models.CharField(max_length=8,default=None)
-    password=models.CharField(max_length=100,default="")
+    password=models.CharField(max_length=200,default="")
+    github=models.CharField(max_length=100,default=None)
+
 
     def __str__(self):
         return f'{self.first_name},{self.email}'
+
+
+#class ExampleModel(models.Model):
+#    model_pic = models.ImageField(upload_to = 'pic_folder/', default = 'pic_folder/None/no-img.jpg')
