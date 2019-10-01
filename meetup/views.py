@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+from django.core.files.storage import FileSystemStorage
 import datetime
 from hashing import *
 
@@ -43,7 +44,6 @@ def Register(request):
         #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
 
         form=RegisterForm()
-
     context={
     'form':form,
     }
@@ -75,21 +75,31 @@ def login(request):
                  return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
         else:
-        #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
-
+             print('here')
              form=LoginForm()
+        context={
+         'form':form,
+         }
 
-             context={
-                'form':form,
-             }
-
-
-             return render(request,'login.html',context)
+        return render(request,'login.html',context)
 
 
 def dashboard(request,user):
     if request.session.get('name'):
-        return render(request,'dashboard.html',{'user':user,})
+        us=Register_user.objects.get(roll_no=user)
+        if request.method == 'POST' and request.FILES['myfile']:
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
+            us.img_link=uploaded_file_url
+            us.save()
+            print(uploaded_file_url)
+            return render(request, 'dashboard.html', {
+                'us':us,'user':user,
+            })
+        return render(request,'dashboard.html',{'user':user,'us':us})
+
     else:
         return login(request)
 
@@ -97,16 +107,15 @@ def logout(request):
     try:
           del request.session['name']
           print("user deleted")
-          print(request.session.get('name'))
     except :
           pass
-    return  login(request)
+    return HttpResponseRedirect(reverse('login_user'))
 
 def profile(request,user):
     us=Register_user.objects.get(roll_no=user)
 
     if request.method=='POST':
-       form =UpdateForm(request.POST)
+       form =UpdateForm(request.POST,request.FILES)
        print("post")
 
        if form.is_valid():
@@ -126,3 +135,21 @@ def profile(request,user):
     'form':form,
     }
     return render(request,'profile.html',context=context)
+
+
+
+
+
+
+'''def confirm(request,user):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        print(filename)
+        return render(request, 'confirm_regis.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'confirm_regis.html')
+'''
