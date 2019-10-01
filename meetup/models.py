@@ -12,6 +12,7 @@ class Register_user(models.Model):
     roll_no=models.CharField(max_length=8,default=None)
     password=models.CharField(max_length=200,default="")
     github=models.CharField(max_length=100,default=None)
+    img_link=models.CharField(max_length=100,default="http://127.0.0.1:8000/media/image.jpeg")
 
 
     def __str__(self):
