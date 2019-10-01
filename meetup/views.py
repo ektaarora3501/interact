@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from meetup.models import Register_user
-from meetup.forms import RegisterForm,LoginForm
+from meetup.forms import RegisterForm,LoginForm,UpdateForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse,reverse_lazy
 from django.shortcuts import redirect
@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 import datetime
-import bcrypt
+from hashing import *
 
 def index(request):
     return render(request,'home.html')
@@ -32,8 +32,7 @@ def Register(request):
            us.curr_year=form.cleaned_data['curr_year']
            us.roll_no=form.cleaned_data['adm_no']
            user=form.cleaned_data['password']
-           user=user.encode('utf-8')
-           us.password=bcrypt.hashpw(user,bcrypt.gensalt())
+           us.password=hash_password(user)
            print(us.password)
            us.save()
            print("branch,curr_year",us.branch,us.curr_year)
@@ -59,28 +58,33 @@ def confirm(request,user):
     return render(request,'confirm_regis.html',context)
 
 def login(request):
-    if request.method=='POST':
-       form =LoginForm(request.POST)
-       print("post")
+   if request.session.get('name'):
+       nm=request.session.get('name')
+       return HttpResponseRedirect(reverse('user-dashboard',args=(nm,)))
+   else:
 
-       if form.is_valid():
-           print("form valid")
-           user=form.cleaned_data['adm_no']
-           request.session['name']=user
-           print("sesssion set!")
-           return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
+        if request.method=='POST':
+            form =LoginForm(request.POST)
+            print("post")
 
-    else:
+            if form.is_valid():
+                 print("form valid")
+                 user=form.cleaned_data['adm_no']
+                 request.session['name']=user
+                 print("sesssion set!")
+                 return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
+
+        else:
         #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
 
-        form=LoginForm()
+             form=LoginForm()
 
-    context={
-    'form':form,
-    }
+             context={
+                'form':form,
+             }
 
 
-    return render(request,'login.html',context)
+             return render(request,'login.html',context)
 
 
 def dashboard(request,user):
@@ -97,3 +101,28 @@ def logout(request):
     except :
           pass
     return  login(request)
+
+def profile(request,user):
+    us=Register_user.objects.get(roll_no=user)
+
+    if request.method=='POST':
+       form =UpdateForm(request.POST)
+       print("post")
+
+       if form.is_valid():
+           print("form valid")
+           us.github=form.cleaned_data['github_link']
+           us.email=form.cleaned_data['email']
+           us.save()
+           return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
+
+    else:
+        #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
+       print(us.first_name)
+       form=UpdateForm(initial={'email':us.email,'github_link':us.github})
+    context={
+    'name':us.first_name,
+    'branch':us.branch,
+    'form':form,
+    }
+    return render(request,'profile.html',context=context)
