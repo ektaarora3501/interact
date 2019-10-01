@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from bootstrap_datepicker_plus import DatePickerInput
 import bcrypt
+from hashing import *
 
 class RegisterForm(forms.Form):
     first_name=CharField(label='First Name',max_length=100)
@@ -58,15 +59,13 @@ class LoginForm(forms.Form):
         us=Register_user.objects.get(roll_no=adm)
         print(us.branch)
         p=self.cleaned_data['password']
-        #p=p.encode('utf-8')
-        #print(type(p))
-        #print(bytes(us.password.decode('utf-8')))
-        #user=bcrypt.hashpw(p,bcrypt.gensalt())
-        #user=(bytes(us.password.encode('utf-8')))
-        #user=user.encode('utf-8')
-        #print(user)
-        #print(type(user))
-        #bcrypt.checkpw(user,user)
-        if(p!=us.password):
+        a=verify_password(us.password,p)
+        if(a is False ):
             raise ValidationError(_("Incorrect Password"))
         return p
+
+
+
+class UpdateForm(forms.Form):
+    email=EmailField()
+    github_link=CharField(max_length=100,help_text='enter your github id')
