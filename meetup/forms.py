@@ -1,4 +1,4 @@
-from django.forms import PasswordInput,forms,CharField,EmailField,ChoiceField,Textarea
+from django.forms import PasswordInput,forms,CharField,EmailField,ChoiceField,Textarea,ImageField
 from meetup.models import Register_user
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -62,7 +62,7 @@ class LoginForm(forms.Form):
         a=verify_password(us.password,p)
         if(a is False ):
             raise ValidationError(_("Incorrect Password"))
-        return p
+        return a
 
 
 
