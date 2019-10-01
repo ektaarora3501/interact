@@ -15,59 +15,48 @@ if(!!window.performance && window.performance.navigation.type == 2)
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+
 body {
-  margin: 0;
   font-family: "Lato", sans-serif;
 }
 
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-  position:absolute;
-  height: 1000px;
-  overflow: auto;
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 20px;
 }
 
-.sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
+.sidenav a {
+  padding: 8px 8px 8px 32px;
   text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
 }
 
-.sidebar a.active {
-  background-color: #4CAF50;
-  color: white;
+.sidenav a:hover {
+  color: #f1f1f1;
 }
 
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
 }
 
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
-}
-
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
-
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
+@media screen and (max-height: 600px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
 
 .header{
@@ -77,25 +66,77 @@ height:60px;
 text-align: center;
 font-size:40px;
 color:white;
-position: static;
+position: relative;
 
+}
+
+form{
+  align-items: center;
+  align-self: center;
+}
+
+.edit-css{
+  align-items: center;
+  align-self: center;
+}
+
+img{
+  width: 220px;
+  height: 360px;
+  align-self: center;
+  margin-left: 5%;
+  margin-right: 2%
+}
+
+.footer{
+  position: sticky;
+  margin-top: 80%;
 }
 
   </style>
 </head>
 <body onunload="">
   <div class="header">
-    One stop
+    One  stop
   </div>
-<div class="sidebar">
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <br>
+  <img src="{{ us.img_link }}">
+  <br>
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="edit-css">
+      <input type="file" name="myfile">
+      <button type="submit">Upload</button>
+    </div>
+    </form>
   <a href=" {% url 'home' %}">Home</a>
   <a href="{% url 'user-profile' user %}">Set Profile</a>
   <a href=" {% url 'logout' %}">logout</a>
+
 </div>
+
+<span style="font-size:30px;cursor:pointer;margin-left: 90%;" onclick="openNav()">&#9776;</span>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+
 <div class="content">
   hello {{ user }} to your dashboard
 </div>
 
+<div class="footer">
+  gjhgjhgjhfijfdijf
+</div>
 </body>
 </html>
