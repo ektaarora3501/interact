@@ -9,4 +9,5 @@ urlpatterns=[
     path('user_dashboard/<user>',views.dashboard,name='user-dashboard'),
     path('logout',views.logout,name='logout'),
     path('profile/<user>',views.profile,name='user-profile'),
+    path('filter/<skill>',views.get_skill,name='skill_filter'),
 ]
