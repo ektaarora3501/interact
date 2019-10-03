@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>
+    home page
+  </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -56,6 +59,15 @@ position: static;
 
 }
 
+
+.video{
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 20%;
+
+}
+
+
 </style>
 </head>
 <body>
@@ -66,6 +78,8 @@ position: static;
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="{% url 'register' %}">Register</a>
+  <a href="{% url 'login_user' %}">Login</a>
+
 </div>
 
 <span style="font-size:30px;cursor:pointer;margin-left: 90%;" onclick="openNav()">&#9776;</span>
@@ -79,6 +93,14 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 </script>
+
+<div class="video">
+  <iframe  width="680" height="375" src="https://www.youtube.com/embed/rlR4PJn8b8I" frameborder="0" allowfullscreen></iframe>
+</div>
+<div class="footer">
+  gjhgjhgjhfijfdijf
+</div>
+
 
 </body>
 </html>
