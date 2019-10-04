@@ -6,8 +6,8 @@
   <style>
   .flip-card {
 background-color: transparent;
-width: 300px;
-height: 400px;
+width: 200px;
+height: 250px;
 border: 1px solid #f1f1f1;
 perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
@@ -50,19 +50,30 @@ transform: rotateY(180deg);
   </style>
 </head>
 <body>
-  hello {{ user }} you are registered.........
+  {% for user in us %}
   <div class="flip-card">
  <div class="flip-card-inner">
    <div class="flip-card-front">
-     <img src="http://127.0.0.1:8000/media/im2.jpg" alt="Avatar" style="width:300px;height:400px;">
+     <img src="{{ user.img_link }}" alt="Avatar" style="width:150px;height:200px;">
+     <br>
+     <span>{{ user.first_name }}</span>
+     <span>{{ user.last_name }}</span>
+     <br>
+     Current Year :{{ user.curr_year }}
    </div>
    <div class="flip-card-back">
-     <h1>John Doe</h1>
-     <p>Architect & Engineer</p>
-     <p>We love that guy</p>
+     <h1>{{ user.first_name }}</h1>
+     skills
+     <ul>
+     {% if user.skill1 %}
+     <li>{{ user.skill1 }}</li>
+     {% endif %}
+   </ul>
+     Github link
+     <span>{{ user.github }}</span>
    </div>
  </div>
 </div>
-
+{% endfor %}
 </body>
 </html>

@@ -9,15 +9,12 @@ class Register_user(models.Model):
     branch=models.CharField(max_length=100)
     email=models.EmailField(unique=True)
     curr_year=models.CharField(max_length=100)
-    roll_no=models.CharField(max_length=8,default=None)
+    roll_no=models.CharField(max_length=8,default=None,primary_key=True)
     password=models.CharField(max_length=200,default="")
-    github=models.CharField(max_length=100,default=None)
+    github=models.CharField(max_length=100,default="")
     img_link=models.CharField(max_length=100,default="http://127.0.0.1:8000/media/image.jpeg")
+    skill1=models.CharField(max_length=100,default="0")
 
 
     def __str__(self):
         return f'{self.first_name},{self.email}'
-
-
-#class ExampleModel(models.Model):
-#    model_pic = models.ImageField(upload_to = 'pic_folder/', default = 'pic_folder/None/no-img.jpg')

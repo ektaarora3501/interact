@@ -122,6 +122,7 @@ def profile(request,user):
            print("form valid")
            us.github=form.cleaned_data['github_link']
            us.email=form.cleaned_data['email']
+           us.skill1=form.cleaned_data['skill1']
            us.save()
            return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
@@ -136,20 +137,10 @@ def profile(request,user):
     }
     return render(request,'profile.html',context=context)
 
+def get_skill(request,skill):
+    us=Register_user.objects.filter(skill1=skill).all()
+    context={
+    'us':us,
+    }
 
-
-
-
-
-'''def confirm(request,user):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        print(filename)
-        return render(request, 'confirm_regis.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, 'confirm_regis.html')
-'''
+    return render(request,'skill.html',context=context)
