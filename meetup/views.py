@@ -84,6 +84,8 @@ def login(request):
         return render(request,'login.html',context)
 
 
+
+
 def dashboard(request,user):
     if request.session.get('name'):
         us=Register_user.objects.get(roll_no=user)
@@ -102,6 +104,10 @@ def dashboard(request,user):
 
     else:
         return login(request)
+
+
+
+
 
 def logout(request):
     try:
@@ -123,6 +129,9 @@ def profile(request,user):
            us.github=form.cleaned_data['github_link']
            us.email=form.cleaned_data['email']
            us.skill1=form.cleaned_data['skill1']
+           us.skill2=form.cleaned_data['skill2']
+           us.skill3=form.cleaned_data['skill3']
+           us.skill4=form.cleaned_data['skill4']
            us.save()
            return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
@@ -138,9 +147,14 @@ def profile(request,user):
     return render(request,'profile.html',context=context)
 
 def get_skill(request,skill):
-    us=Register_user.objects.filter(skill1=skill).all()
+    us1=Register_user.objects.filter(skill1=skill).all()
+    us2=Register_user.objects.filter(skill2=skill).all()
+    us3=Register_user.objects.filter(skill3=skill).all()
+    us4=Register_user.objects.filter(skill4=skill).all()
     context={
-    'us':us,
+    'us1':us1,
+    'us2':us2,
+    'us3':us3,
+    'us4':us4,
     }
-
     return render(request,'skill.html',context=context)
