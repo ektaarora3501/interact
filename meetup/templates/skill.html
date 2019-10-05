@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>
-    confirm_regis
+    Skills 
   </title>
   <style>
   .flip-card {
@@ -50,7 +50,8 @@ transform: rotateY(180deg);
   </style>
 </head>
 <body>
-  {% for user in us %}
+  {% if us1 %}
+  {% for user in us1 %}
   <div class="flip-card">
  <div class="flip-card-inner">
    <div class="flip-card-front">
@@ -68,6 +69,12 @@ transform: rotateY(180deg);
      {% if user.skill1 %}
      <li>{{ user.skill1 }}</li>
      {% endif %}
+     {% if user.skill2 %}
+     <li>{{ user.skill2 }}</li>
+     {% endif %}
+     {% if user.skill3 %}
+     <li>{{ user.skill3 }}</li>
+     {% endif %}
    </ul>
      Github link
      <span>{{ user.github }}</span>
@@ -75,5 +82,82 @@ transform: rotateY(180deg);
  </div>
 </div>
 {% endfor %}
+{% endif %}
+
+{% if us2 %}
+{% for user in us2 %}
+<div class="flip-card">
+<div class="flip-card-inner">
+ <div class="flip-card-front">
+   <img src="{{ user.img_link }}" alt="Avatar" style="width:150px;height:200px;">
+   <br>
+   <span>{{ user.first_name }}</span>
+   <span>{{ user.last_name }}</span>
+   <br>
+   Current Year :{{ user.curr_year }}
+ </div>
+   <div class="flip-card-back">
+       <h1>{{ user.first_name }}</h1>
+      skills
+         <ul>
+              {% if user.skill1 %}
+                <li>{{ user.skill1 }}</li>
+              {% endif %}
+
+              {% if user.skill2 %}
+                <li>{{ user.skill2 }}</li>
+                {% endif %}
+
+            {% if user.skill3 %}
+                <li>{{ user.skill3 }}</li>
+            {% endif %}
+
+        </ul>
+        Github link
+            <span>{{ user.github }}</span>
+      </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+{% if us3 %}
+{% for user in us3 %}
+ <div class="flip-card">
+      <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="{{ user.img_link }}" alt="Avatar" style="width:150px;height:200px;">
+                <br>
+                  <span>{{ user.first_name }}</span>
+                  <span>{{ user.last_name }}</span>
+                  <br>
+                  Current Year :{{ user.curr_year }}
+           </div>
+    <div class="flip-card-back">
+            <h1>{{ user.first_name }}</h1>
+            skills
+              <ul>
+                  {% if user.skill1 %}
+                  <li>{{ user.skill1 }}</li>
+                  {% endif %}
+
+                  {% if user.skill2 %}
+                  <li>{{ user.skill2 }}</li>
+                  {% endif %}
+
+                  {% if user.skill3 %}
+                  <li>{{ user.skill3 }}</li>
+                  {% endif %}
+
+                  Github link
+                    <span>{{ user.github }}</span>
+            </div>
+      </div>
+</div>
+      {% endfor %}
+    {% endif %}
+
+
 </body>
 </html>
