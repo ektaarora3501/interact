@@ -69,5 +69,8 @@ class LoginForm(forms.Form):
 class UpdateForm(forms.Form):
     email=EmailField()
     github_link=CharField(max_length=100,help_text='enter your github id')
-    ch=[("0","select"),("python","Python"),("C++","C++"),("django","Django"),("Node","Nodejs"),("React","React.js"),("java","Java"),("Android","Android"),("Flutter","Flutter"),("Competitive-coding","Competitive coding"),("ML","Machine learning")]
+    ch=[(None,"select"),("python","Python"),("C++","C++"),("django","Django"),("Node","Nodejs"),("React","React.js"),("java","Java"),("Android","Android"),("Flutter","Flutter"),("Competitive-coding","Competitive coding"),("ML","Machine learning")]
     skill1=ChoiceField(choices=ch,label="Skill 1",help_text="optional",required=False)
+    skill2=ChoiceField(choices=ch,label="Skill 2",help_text="optional",required=False)
+    skill3=ChoiceField(choices=ch,label="Skill 3",help_text="optional",required=False)
+    skill4=ChoiceField(choices=ch,label="Skill 4",help_text="optional",required=False)
