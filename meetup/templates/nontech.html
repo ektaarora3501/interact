@@ -1,16 +1,18 @@
 <html>
 <head>
   <title>
-    Skills 
+    Skills
   </title>
   <style>
   .flip-card {
-background-color: transparent;
-width: 200px;
-height: 250px;
-border: 1px solid #f1f1f1;
-perspective: 1000px; /* Remove this if you don't want the 3D effect */
-}
+    background-color: transparent;
+    width: 300px;
+    height: 400px;
+    border: 1px solid #f1f1f1;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    }
+
+
 
 /* This container is needed to position the front and back side */
 .flip-card-inner {
@@ -37,7 +39,7 @@ backface-visibility: hidden;
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-background-color: #bbb;
+background-color: white;
 color: black;
 }
 
@@ -47,39 +49,88 @@ background-color: dodgerblue;
 color: white;
 transform: rotateY(180deg);
 }
+
+
+.header{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+background-color: #012e69;
+height:60px;
+text-align: center;
+font-size:40px;
+color:white;
+position: relative;
+
+}
+
+form{
+  align-items: center;
+  align-self: center;
+}
+
+.edit-css{
+  align-items: center;
+  align-self: center;
+}
+
+img{
+  width: 220px;
+  height: 360px;
+  align-self: center;
+}
+
+.footer{
+  position: sticky;
+  margin-top: 80%;
+}
+
   </style>
 </head>
 <body>
+  <div class="header">
+    One stop
+  </div>
   {% if us1 %}
   {% for user in us1 %}
   <div class="flip-card">
  <div class="flip-card-inner">
    <div class="flip-card-front">
-     <img src="{{ user.img_link }}" alt="Avatar" style="width:150px;height:200px;">
+     <img src="{{ user.img_link }}" alt="Avatar" style="width:300px;height:300px;">
      <br>
      <span>{{ user.first_name }}</span>
      <span>{{ user.last_name }}</span>
      <br>
      Current Year :{{ user.curr_year }}
    </div>
-   <div class="flip-card-back">
-     <h1>{{ user.first_name }}</h1>
-     skills
-     <ul>
-     {% if user.skill1 %}
-     <li>{{ user.skill1 }}</li>
-     {% endif %}
-     {% if user.skill2 %}
-     <li>{{ user.skill2 }}</li>
-     {% endif %}
-     {% if user.skill3 %}
-     <li>{{ user.skill3 }}</li>
-     {% endif %}
-   </ul>
-     Github link
-     <span>{{ user.github }}</span>
-   </div>
- </div>
+        <div class="flip-card-back">
+            <h1>{{ user.first_name }}</h1>
+              skills
+                <ul>
+                    {% if user.skill1 %}
+                      <li>{{ user.skill1 }}</li>
+                      {% endif %}
+                      {% if user.skill2 %}
+                      <li>{{ user.skill2 }}</li>
+                      {% endif %}
+                      {% if user.skill3 %}
+                      <li>{{ user.skill3 }}</li>
+                      {% endif %}
+                      {% if user.ntech1 %}
+                      Member of :<br>
+                        <li>{{ user.ntech1 }}</li>
+                        {% endif %}
+                        {% if user.ntech2 %}
+                         Member of :<br>
+                        <li>{{ user.ntech2 }}</li>
+                        {% endif %}
+                        {% if user.ntech3 %}
+                        Member of :<br>
+                        <li>{{ user.ntech3 }}</li>
+                        {% endif %}
+                </ul>
+                Github link
+                  <span>{{ user.github }}</span>
+          </div>
+        </div>
 </div>
 {% endfor %}
 {% endif %}
@@ -111,7 +162,18 @@ transform: rotateY(180deg);
             {% if user.skill3 %}
                 <li>{{ user.skill3 }}</li>
             {% endif %}
-
+            {% if user.ntech1 %}
+            Member of :<br>
+              <li>{{ user.ntech1 }}</li>
+              {% endif %}
+              {% if user.ntech2 %}
+               Member of :<br>
+              <li>{{ user.ntech2 }}</li>
+              {% endif %}
+              {% if user.ntech3 %}
+              Member of :<br>
+              <li>{{ user.ntech3 }}</li>
+              {% endif %}
         </ul>
         Github link
             <span>{{ user.github }}</span>
@@ -149,7 +211,18 @@ transform: rotateY(180deg);
                   {% if user.skill3 %}
                   <li>{{ user.skill3 }}</li>
                   {% endif %}
-
+                  {% if user.ntech1 %}
+                  Member of :<br>
+                    <li>{{ user.ntech1 }}</li>
+                    {% endif %}
+                    {% if user.ntech2 %}
+                     Member of :<br>
+                    <li>{{ user.ntech2 }}</li>
+                    {% endif %}
+                    {% if user.ntech3 %}
+                    Member of :<br>
+                    <li>{{ user.ntech3 }}</li>
+                    {% endif %}
                   Github link
                     <span>{{ user.github }}</span>
             </div>

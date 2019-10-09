@@ -14,6 +14,14 @@ class Register_user(models.Model):
     github=models.CharField(max_length=100,default="")
     img_link=models.CharField(max_length=100,default="http://127.0.0.1:8000/media/image.jpeg")
     skill1=models.CharField(max_length=100,default="0")
+    skill2=models.CharField(max_length=100,default="0")
+    skill3=models.CharField(max_length=100,default="0")
+    skill4=models.CharField(max_length=100,default="0")
+
+    ntech1=models.CharField(max_length=100,default="0")
+    ntech2=models.CharField(max_length=100,default="0")
+    ntech3=models.CharField(max_length=100,default="0")
+    ntech4=models.CharField(max_length=100,default="0")
 
 
     def __str__(self):
