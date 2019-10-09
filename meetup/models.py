@@ -18,6 +18,11 @@ class Register_user(models.Model):
     skill3=models.CharField(max_length=100,default="0")
     skill4=models.CharField(max_length=100,default="0")
 
+    ntech1=models.CharField(max_length=100,default="0")
+    ntech2=models.CharField(max_length=100,default="0")
+    ntech3=models.CharField(max_length=100,default="0")
+    ntech4=models.CharField(max_length=100,default="0")
+
 
     def __str__(self):
         return f'{self.first_name},{self.email}'

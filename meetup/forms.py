@@ -70,7 +70,13 @@ class UpdateForm(forms.Form):
     email=EmailField()
     github_link=CharField(max_length=100,help_text='enter your github id')
     ch=[(None,"select"),("python","Python"),("C++","C++"),("django","Django"),("Node","Nodejs"),("React","React.js"),("java","Java"),("Android","Android"),("Flutter","Flutter"),("Competitive-coding","Competitive coding"),("ML","Machine learning")]
-    skill1=ChoiceField(choices=ch,label="Skill 1",help_text="optional",required=False)
-    skill2=ChoiceField(choices=ch,label="Skill 2",help_text="optional",required=False)
-    skill3=ChoiceField(choices=ch,label="Skill 3",help_text="optional",required=False)
-    skill4=ChoiceField(choices=ch,label="Skill 4",help_text="optional",required=False)
+    skill1=ChoiceField(choices=ch,label="Technical Skill 1",help_text="optional",required=False)
+    skill2=ChoiceField(choices=ch,label="Technical Skill 2",help_text="optional",required=False)
+    skill3=ChoiceField(choices=ch,label="Technical  Skill 3",help_text="optional",required=False)
+    skill4=ChoiceField(choices=ch,label="Technical  Skill 4",help_text="optional",required=False)
+    ch2=[(None,"select"),("Joyfest","Joyfest"),("Cinephelia","Cinephalia"),("Convex","Convex"),("Kirdaar","Kirdaar"),("Raag","Raag"),("Malang","Malang")]
+    ntech1=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
+    ntech2=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
+    ntech3=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
+    ntech4=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
+    summmary=CharField(widget=Textarea,label="something to show offf !!",help_text="Short Description about yourself")
