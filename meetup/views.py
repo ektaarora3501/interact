@@ -132,6 +132,10 @@ def profile(request,user):
            us.skill2=form.cleaned_data['skill2']
            us.skill3=form.cleaned_data['skill3']
            us.skill4=form.cleaned_data['skill4']
+           us.ntech1=form.cleaned_data['ntech1']
+           us.ntech2=form.cleaned_data['ntech2']
+           us.ntech3=form.cleaned_data['ntech3']
+           us.ntech4=form.cleaned_data['ntech4']
            us.save()
            return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
@@ -146,7 +150,7 @@ def profile(request,user):
     }
     return render(request,'profile.html',context=context)
 
-def get_skill(request,skill):
+def get_skill_tech(request,skill):
     us1=Register_user.objects.filter(skill1=skill).all()
     us2=Register_user.objects.filter(skill2=skill).all()
     us3=Register_user.objects.filter(skill3=skill).all()
@@ -156,5 +160,26 @@ def get_skill(request,skill):
     'us2':us2,
     'us3':us3,
     'us4':us4,
+    'skill':skill,
     }
-    return render(request,'skill.html',context=context)
+    return render(request,'skill_tech.html',context=context)
+
+def get_member(request,group):
+    us1=Register_user.objects.filter(ntech1=group).all()
+    us2=Register_user.objects.filter(ntech2=group).all()
+    us3=Register_user.objects.filter(ntech3=group).all()
+    us4=Register_user.objects.filter(ntech4=group).all()
+    context={
+    'us1':us1,
+    'us2':us2,
+    'us3':us3,
+    'us4':us4,
+    'group':group,
+    }
+    return render(request,'nontech.html',context=context)
+
+
+
+
+def material(request):
+    return render(request,'syllabus_page.html')
