@@ -8,8 +8,11 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.core.files.storage import FileSystemStorage
+from django.core.mail import send_mail
+from django.conf import settings
 import datetime
 from hashing import *
+from django.core.mail import EmailMessage
 
 def index(request):
     return render(request,'home.html')
@@ -85,25 +88,35 @@ def login(request):
 
 
 
-
 def dashboard(request,user):
     if request.session.get('name'):
         us=Register_user.objects.get(roll_no=user)
-        if request.method == 'POST' and request.FILES['myfile']:
-            myfile = request.FILES['myfile']
-            fs = FileSystemStorage()
-            filename = fs.save(myfile.name, myfile)
-            uploaded_file_url = fs.url(filename)
-            us.img_link=uploaded_file_url
-            us.save()
-            print(uploaded_file_url)
-            return render(request, 'dashboard.html', {
-                'us':us,'user':user,
-            })
+        if request.method == 'POST' :
+            #if request.POST['msg']:
+            #       print(request.POST['msg'])
+            if request.FILES['myfile']:
+                myfile = request.FILES['myfile']
+                fs = FileSystemStorage()
+                filename = fs.save(myfile.name, myfile)
+                uploaded_file_url = fs.url(filename)
+                us.img_link=uploaded_file_url
+                us.save()
+                #my = request.POST['msg']
+                #print(my)
+                print(uploaded_file_url)
+                return render(request, 'dashboard.html', {
+                    'us':us,'user':user,
+                    })
+
+        '''elif request.method == 'POST':
+            myfile = request.POST['msg']
+            print(myfile)'''
         return render(request,'dashboard.html',{'user':user,'us':us})
 
+
+
     else:
-        return login(request)
+        return HttpResponseRedirect(reverse('login_user'))
 
 
 
@@ -118,68 +131,87 @@ def logout(request):
     return HttpResponseRedirect(reverse('login_user'))
 
 def profile(request,user):
-    us=Register_user.objects.get(roll_no=user)
+    if request.session.get('name'):
+        us=Register_user.objects.get(roll_no=user)
 
-    if request.method=='POST':
-       form =UpdateForm(request.POST,request.FILES)
-       print("post")
+        if request.method=='POST':
+            form =UpdateForm(request.POST,request.FILES)
+            print("post")
 
-       if form.is_valid():
-           print("form valid")
-           us.github=form.cleaned_data['github_link']
-           us.email=form.cleaned_data['email']
-           us.skill1=form.cleaned_data['skill1']
-           us.skill2=form.cleaned_data['skill2']
-           us.skill3=form.cleaned_data['skill3']
-           us.skill4=form.cleaned_data['skill4']
-           us.ntech1=form.cleaned_data['ntech1']
-           us.ntech2=form.cleaned_data['ntech2']
-           us.ntech3=form.cleaned_data['ntech3']
-           us.ntech4=form.cleaned_data['ntech4']
-           us.save()
-           return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
+            if form.is_valid():
+                print("form valid")
+                us.github=form.cleaned_data['github_link']
+                us.email=form.cleaned_data['email']
+                us.skill1=form.cleaned_data['skill1']
+                us.skill2=form.cleaned_data['skill2']
+                us.skill3=form.cleaned_data['skill3']
+                us.skill4=form.cleaned_data['skill4']
+                us.ntech1=form.cleaned_data['ntech1']
+                us.ntech2=form.cleaned_data['ntech2']
+                us.ntech3=form.cleaned_data['ntech3']
+                us.ntech4=form.cleaned_data['ntech4']
+                us.save()
+                return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
+
+            else:
+        #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
+                print(us.first_name)
+                form=UpdateForm(initial={'email':us.email,'github_link':us.github})
+            context={
+            'name':us.first_name,
+            'branch':us.branch,
+            'form':form,
+            }
+            return render(request,'profile.html',context=context)
 
     else:
-        #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
-       print(us.first_name)
-       form=UpdateForm(initial={'email':us.email,'github_link':us.github})
-    context={
-    'name':us.first_name,
-    'branch':us.branch,
-    'form':form,
-    }
-    return render(request,'profile.html',context=context)
+        return HttpResponseRedirect(reverse('login_user'))
+
 
 def get_skill_tech(request,skill):
-    us1=Register_user.objects.filter(skill1=skill).all()
-    us2=Register_user.objects.filter(skill2=skill).all()
-    us3=Register_user.objects.filter(skill3=skill).all()
-    us4=Register_user.objects.filter(skill4=skill).all()
-    context={
-    'us1':us1,
-    'us2':us2,
-    'us3':us3,
-    'us4':us4,
-    'skill':skill,
-    }
-    return render(request,'skill_tech.html',context=context)
+    if request.session.get('name'):
+        us1=Register_user.objects.filter(skill1=skill).all()
+        us2=Register_user.objects.filter(skill2=skill).all()
+        us3=Register_user.objects.filter(skill3=skill).all()
+        us4=Register_user.objects.filter(skill4=skill).all()
+        context={
+        'us1':us1,
+        'us2':us2,
+        'us3':us3,
+        'us4':us4,
+        'skill':skill,
+        }
+        return render(request,'skill_tech.html',context=context)
+    else:
+        return HttpResponseRedirect(reverse('login_user'))
 
 def get_member(request,group):
-    us1=Register_user.objects.filter(ntech1=group).all()
-    us2=Register_user.objects.filter(ntech2=group).all()
-    us3=Register_user.objects.filter(ntech3=group).all()
-    us4=Register_user.objects.filter(ntech4=group).all()
-    context={
-    'us1':us1,
-    'us2':us2,
-    'us3':us3,
-    'us4':us4,
-    'group':group,
-    }
-    return render(request,'nontech.html',context=context)
-
-
-
+    if request.session.get('name'):
+        us1=Register_user.objects.filter(ntech1=group).all()
+        us2=Register_user.objects.filter(ntech2=group).all()
+        us3=Register_user.objects.filter(ntech3=group).all()
+        us4=Register_user.objects.filter(ntech4=group).all()
+        context={
+        'us1':us1,
+        'us2':us2,
+        'us3':us3,
+        'us4':us4,
+        'group':group,
+        }
+        return render(request,'nontech.html',context=context)
+    else:
+        return HttpResponseRedirect(reverse('login_user'))
 
 def material(request):
     return render(request,'syllabus_page.html')
+
+
+def contact(request):
+    if request.method=='POST':
+        print(request.POST['email'])
+        a=request.POST['email']
+        msg = EmailMessage('Message from ' + ' ' + a,
+                       request.POST['msg'], to=['**********@gmail.com'])
+        msg.send()
+        print("mail sent")
+    return HttpResponseRedirect(reverse('user-dashboard',args=(request.session.get('name'),)))
