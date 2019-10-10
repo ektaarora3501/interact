@@ -25,7 +25,7 @@ SECRET_KEY = '3gt^od%*bvd&0qb(ftul*2jy0**6rl$aopsur1cz9uvd(!5bn&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,9 +79,12 @@ WSGI_APPLICATION = 'asmp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-         'OPTIONS': {
-            'read_default_file': '/etc/mysql/.my.cnf',
-        },
+        'NAME': 'dhairya',
+        'USER': 'root',
+        'PASSWORD': 'password'
+        #  'OPTIONS': {
+        #     'read_default_file': '/etc/mysql/.my.cnf',
+        # },
     }
 }
 

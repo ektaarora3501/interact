@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.core.files.storage import FileSystemStorage
 import datetime
-from hashing import *
+#from hashing import *
 
 def index(request):
     return render(request,'home.html')

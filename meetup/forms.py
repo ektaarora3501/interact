@@ -2,9 +2,9 @@ from django.forms import PasswordInput,forms,CharField,EmailField,ChoiceField,Te
 from meetup.models import Register_user
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from bootstrap_datepicker_plus import DatePickerInput
-import bcrypt
-from hashing import *
+#from bootstrap_datepicker_plus import DatePickerInput
+#import bcrypt
+#from hashing import *
 
 class RegisterForm(forms.Form):
     first_name=CharField(label='First Name',max_length=100)
