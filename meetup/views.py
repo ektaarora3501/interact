@@ -88,7 +88,6 @@ def login(request):
         return render(request,'login.html',context)
 
 
-
 def dashboard(request,user):
     if request.session.get('name'):
         us=Register_user.objects.get(roll_no=user)
@@ -109,9 +108,6 @@ def dashboard(request,user):
                     'us':us,'user':user,
                     })
 
-        '''elif request.method == 'POST':
-            myfile = request.POST['msg']
-            print(myfile)'''
         return render(request,'dashboard.html',{'user':user,'us':us})
 
 
@@ -136,7 +132,7 @@ def profile(request,user):
         us=Register_user.objects.get(roll_no=user)
 
         if request.method=='POST':
-            form =UpdateForm(request.POST,request.FILES)
+            form =UpdateForm(request.POST)
             print("post")
 
             if form.is_valid():
@@ -151,19 +147,19 @@ def profile(request,user):
                 us.ntech2=form.cleaned_data['ntech2']
                 us.ntech3=form.cleaned_data['ntech3']
                 us.ntech4=form.cleaned_data['ntech4']
+                us.summary=form.cleaned_data['summary']
                 us.save()
                 return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
-            else:
-        #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
+        else:
                 print(us.first_name)
-                form=UpdateForm(initial={'email':us.email,'github_link':us.github})
-            context={
-            'name':us.first_name,
-            'branch':us.branch,
-            'form':form,
-            }
-            return render(request,'profile.html',context=context)
+                form=UpdateForm(initial={'email':us.email,'github_link':us.github,'summary':us.summary})
+        context={
+        'name':us.first_name,
+        'branch':us.branch,
+        'form':form,
+        }
+        return render(request,'profile.html',context=context)
 
     else:
         return HttpResponseRedirect(reverse('login_user'))
@@ -212,7 +208,7 @@ def contact(request):
         print(request.POST['email'])
         a=request.POST['email']
         msg = EmailMessage('Message from ' + ' ' + a,
-                       request.POST['msg'], to=['**********@gmail.com'])
+                       request.POST['msg'], to=['**************@gmail.com'])
         msg.send()
         print("mail sent")
     return HttpResponseRedirect(reverse('user-dashboard',args=(request.session.get('name'),)))

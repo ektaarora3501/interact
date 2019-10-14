@@ -12,6 +12,7 @@ class Register_user(models.Model):
     roll_no=models.CharField(max_length=8,default=None,primary_key=True)
     password=models.CharField(max_length=200,default="")
     github=models.CharField(max_length=100,default="")
+    summary=models.CharField(max_length=100,default="")
     img_link=models.CharField(max_length=100,default="http://127.0.0.1:8000/media/image.jpeg")
     skill1=models.CharField(max_length=100,default="0")
     skill2=models.CharField(max_length=100,default="0")
