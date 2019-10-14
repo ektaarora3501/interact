@@ -84,12 +84,9 @@ WSGI_APPLICATION = 'asmp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dhairya',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        #  'OPTIONS': {
-        #     'read_default_file': '/etc/mysql/.my.cnf',
-        # },
+          'OPTIONS': {
+             'read_default_file': '/etc/mysql/.my.cnf',
+         },
     }
 }
 
