@@ -207,7 +207,7 @@ def contact(request):
         print(request.POST['email'])
         a=request.POST['email']
         msg = EmailMessage('Message from ' + ' ' + a,
-                       request.POST['msg'], to=['iamdeveloper3553@gmail.com'])
+                       request.POST['msg'], to=['**************@gmail.com'])
         msg.send()
         print("mail sent")
     return HttpResponseRedirect(reverse('user-dashboard',args=(request.session.get('name'),)))
