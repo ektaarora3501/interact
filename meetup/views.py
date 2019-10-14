@@ -11,7 +11,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
 from django.conf import settings
 import datetime
-from hashing import *
+#from hashing import *
 from django.core.mail import EmailMessage
 
 def index(request):
@@ -36,7 +36,8 @@ def Register(request):
            us.curr_year=form.cleaned_data['curr_year']
            us.roll_no=form.cleaned_data['adm_no']
            user=form.cleaned_data['password']
-           us.password=hash_password(user)
+           #us.password=hash_password(user)                     #done by me
+           us.password=user                                     #doen by me
            print(us.password)
            us.save()
            print("branch,curr_year",us.branch,us.curr_year)
