@@ -2,8 +2,6 @@ from django.forms import PasswordInput,forms,CharField,EmailField,ChoiceField,Te
 from meetup.models import Register_user
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from bootstrap_datepicker_plus import DatePickerInput
-import bcrypt
 from hashing import *
 
 class RegisterForm(forms.Form):
@@ -79,4 +77,4 @@ class UpdateForm(forms.Form):
     ntech2=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
     ntech3=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
     ntech4=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
-    summmary=CharField(widget=Textarea,label="something to show offf !!",help_text="Short Description about yourself")
+    summary=CharField(widget=Textarea,label="something to show offf !!",help_text="Short Description about yourself")
