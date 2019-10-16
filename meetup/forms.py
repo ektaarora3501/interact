@@ -32,8 +32,13 @@ class RegisterForm(forms.Form):
 
     def clean_adm_no(self):
         rno=self.cleaned_data['adm_no']
+        print(rno[4])
         if Register_user.objects.filter(roll_no=rno).exists():
             raise ValidationError(_(" the given id is already registered"))
+        elif(rno[1]!='i' or rno[0]!='u'):
+            raise ValidationError(_("Invalid roll no given"))
+        elif(len(rno)!=8):
+            raise ValidationError(_("Invalid roll no given "))
         return rno
 
     def clean_cnf_pass(self):
