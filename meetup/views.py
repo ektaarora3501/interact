@@ -126,7 +126,6 @@ def dashboard(request,user):
 def logout(request):
     try:
           del request.session['name']
-          print("user deleted")
     except :
           pass
     return HttpResponseRedirect(reverse('login_user'))
@@ -136,7 +135,7 @@ def profile(request,user):
         us=Register_user.objects.get(roll_no=user)
 
         if request.method=='POST':
-            form =UpdateForm(request.POST,request.FILES)
+            form =UpdateForm(request.POST)
             print("post")
 
             if form.is_valid():
@@ -151,22 +150,23 @@ def profile(request,user):
                 us.ntech2=form.cleaned_data['ntech2']
                 us.ntech3=form.cleaned_data['ntech3']
                 us.ntech4=form.cleaned_data['ntech4']
+                #us.summary=form.cleaned_data['summary']
                 us.save()
                 return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
-            else:
-        #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
+        else:
                 print(us.first_name)
                 form=UpdateForm(initial={'email':us.email,'github_link':us.github})
-            context={
-            'name':us.first_name,
-            'branch':us.branch,
-            'form':form,
-            }
-            return render(request,'profile.html',context=context)
+        context={
+        'name':us.first_name,
+        'branch':us.branch,
+        'form':form,
+        }
+        return render(request,'profile.html',context=context)
 
     else:
         return HttpResponseRedirect(reverse('login_user'))
+
 
 
 def get_skill_tech(request,skill):
