@@ -74,6 +74,7 @@ def login(request):
                  print("form valid")
                  user=form.cleaned_data['adm_no']
                  request.session['name']=user
+                 print(request.session['name'])
                  print("sesssion set!")
                  return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
@@ -88,7 +89,7 @@ def login(request):
 
 
 def dashboard(request,user):
-    if request.session.get('name'):
+    if request.session.get('name')==user:
         us=Register_user.objects.get(roll_no=user)
         if request.method == 'POST' :
             #if request.POST['msg']:
@@ -115,13 +116,11 @@ def dashboard(request,user):
         return HttpResponseRedirect(reverse('login_user'))
 
 
-
-
-
-def logout(request):
+def logout(request,user):
     try:
-          del request.session['name']
-          print("user deleted")
+        del request.session['name']
+        print("user deleted")
+        print(request.session['name'])
     except :
           pass
     return HttpResponseRedirect(reverse('login_user'))
