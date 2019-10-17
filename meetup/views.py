@@ -163,6 +163,7 @@ def profile(request,user):
         return HttpResponseRedirect(reverse('login_user'))
 
 
+
 def get_skill_tech(request,skill):
     if request.session.get('name'):
         us1=Register_user.objects.filter(skill1=skill).all()
