@@ -5,7 +5,14 @@
 	<title>dashboard</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+<!-- for tree -->
+    
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tree.css' %}">
+    
+    
+    <!-- end tree -->
 	<script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -150,5 +157,64 @@ if(!!window.performance && window.performance.navigation.type == 2)
     </a>
   </div>
 </div>
+    <!-- start tree -->
+    
+    <div class="center">
+	<div class="tf-tree">
+	  <ul>
+	    <li>
+	      <span class="tf-nc">SERNIORS</span>
+	      <ul>
+	      	<li>
+	      		<span class="tf-nc">TECHNICAL</span>
+	      		<ul>
+	      			<li>
+	      				<span class="tf-nc">LANGUAGES</span>
+	      				<ul>
+	      					<li>
+	      						<span class="tf-nc">PYTHON</span>
+	      						<ul>
+	      							<li>
+	      								<span class="tf-nc"><a href="#">JAVA</a></span>
+	      								<ul>
+	      									<li>
+	      										<span class="tf-nc">JAVASCRIPT</span>
+	      									</li>
+	      								</ul>
+	      							</li>
+	      						</ul>
+	      					</li>
+	      				</ul>
+	      			</li>
+	        		<li><span class="tf-nc">FRAMEWORKS</span></li>
+	      		</ul>
+	      	</li>
+	        <li>
+	        	<span class="tf-nc">NON-TECHNICAL</span>
+	        	<ul>
+   					<li>
+   						<span class="tf-nc">raag</span>
+   						<ul>
+   							<li>
+   								<span class="tf-nc">malang</span>
+      								<ul>
+      									<li>
+      										<span class="tf-nc custom">drama</span>
+      									</li>
+      								</ul>
+   							</li>
+   						</ul>
+   					</li>
+   				</ul>
+	        </li>
+	      </ul>
+	    </li>
+	  </ul>
+	</div>
+</div>
+    
+    <!-- end tree -->
+    
+    
 </body>
 </html>
