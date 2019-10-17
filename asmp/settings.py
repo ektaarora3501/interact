@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['*']
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = '************@gmail.com'
-EMAIL_HOST_PASSWORD = 'xxxxxxx'
+EMAIL_HOST_PASSWORD = '**************'
 EMAIL_PORT = 587
 
 # Application definition
@@ -84,12 +84,9 @@ WSGI_APPLICATION = 'asmp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dhairya',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        #  'OPTIONS': {
-        #     'read_default_file': '/etc/mysql/.my.cnf',
-        # },
+          'OPTIONS': {
+             'read_default_file': '/etc/mysql/.my.cnf',
+         },
     }
 }
 

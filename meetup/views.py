@@ -11,7 +11,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
 from django.conf import settings
 import datetime
-#from hashing import *
+from hashing import *
 from django.core.mail import EmailMessage
 
 def index(request):
@@ -36,8 +36,7 @@ def Register(request):
            us.curr_year=form.cleaned_data['curr_year']
            us.roll_no=form.cleaned_data['adm_no']
            user=form.cleaned_data['password']
-           #us.password=hash_password(user)                     #done by me
-           us.password=user                                     #doen by me
+           us.password=hash_password(user)                     #done by me
            print(us.password)
            us.save()
            print("branch,curr_year",us.branch,us.curr_year)
@@ -88,7 +87,6 @@ def login(request):
         return render(request,'login.html',context)
 
 
-
 def dashboard(request,user):
     if request.session.get('name'):
         us=Register_user.objects.get(roll_no=user)
@@ -109,9 +107,6 @@ def dashboard(request,user):
                     'us':us,'user':user,
                     })
 
-        '''elif request.method == 'POST':
-            myfile = request.POST['msg']
-            print(myfile)'''
         return render(request,'dashboard.html',{'user':user,'us':us})
 
 
@@ -150,13 +145,13 @@ def profile(request,user):
                 us.ntech2=form.cleaned_data['ntech2']
                 us.ntech3=form.cleaned_data['ntech3']
                 us.ntech4=form.cleaned_data['ntech4']
-                #us.summary=form.cleaned_data['summary']
+                us.summary=form.cleaned_data['summary']
                 us.save()
                 return HttpResponseRedirect(reverse('user-dashboard',args=(user,)))
 
         else:
                 print(us.first_name)
-                form=UpdateForm(initial={'email':us.email,'github_link':us.github})
+                form=UpdateForm(initial={'email':us.email,'github_link':us.github,'summary':us.summary})
         context={
         'name':us.first_name,
         'branch':us.branch,
@@ -212,7 +207,7 @@ def contact(request):
         print(request.POST['email'])
         a=request.POST['email']
         msg = EmailMessage('Message from ' + ' ' + a,
-                       request.POST['msg'], to=['**********@gmail.com'])
+                       request.POST['msg'], to=['**************@gmail.com'])
         msg.send()
         print("mail sent")
     return HttpResponseRedirect(reverse('user-dashboard',args=(request.session.get('name'),)))
