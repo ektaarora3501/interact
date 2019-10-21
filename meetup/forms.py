@@ -17,6 +17,7 @@ class RegisterForm(forms.Form):
     adm_no=CharField(label='Admission No',max_length=8,help_text="enter your id/roll_no")
     password=CharField(max_length=12,widget=PasswordInput,help_text="Set up password to peek in !!")
     cnf_pass=CharField(max_length=12,widget=PasswordInput,help_text="Reconfirm  your password")
+    summary=CharField(widget=Textarea,label="something to show offf !!",help_text="Short Description about yourself")
 
     def clean_email(self):
         email=self.cleaned_data['email']
