@@ -17,6 +17,7 @@ class RegisterForm(forms.Form):
     adm_no=CharField(label='Admission No',max_length=8,help_text="enter your id/roll_no")
     password=CharField(max_length=12,widget=PasswordInput,help_text="Set up password to peek in !!")
     cnf_pass=CharField(max_length=12,widget=PasswordInput,help_text="Reconfirm  your password")
+    summary=CharField(widget=Textarea,label="something to show offf !!",help_text="Short Description about yourself")
 
     def clean_email(self):
         email=self.cleaned_data['email']
@@ -32,8 +33,13 @@ class RegisterForm(forms.Form):
 
     def clean_adm_no(self):
         rno=self.cleaned_data['adm_no']
+        print(rno[4])
         if Register_user.objects.filter(roll_no=rno).exists():
             raise ValidationError(_(" the given id is already registered"))
+        elif(rno[1]!='i' or rno[0]!='u'):
+            raise ValidationError(_("Invalid roll no given"))
+        elif(len(rno)!=8):
+            raise ValidationError(_("Invalid roll no given "))
         return rno
 
     def clean_cnf_pass(self):
@@ -79,4 +85,4 @@ class UpdateForm(forms.Form):
     ntech2=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
     ntech3=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
     ntech4=ChoiceField(choices=ch2,label="Member of..",help_text="Non tech",required=False)
-    summmary=CharField(widget=Textarea,label="something to show offf !!",help_text="Short Description about yourself")
+    summary=CharField(widget=Textarea,label="something to show offf !!",help_text="Short Description about yourself")

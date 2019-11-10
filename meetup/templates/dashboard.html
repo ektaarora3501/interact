@@ -1,152 +1,220 @@
-<!DOCTYPE HTML>
+{% load static %}
+<!DOCTYPE html>
 <html>
 <head>
-  <title>
-    dashboard
-  </title>
-  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-</head>
-<script>
+	<title>dashboard</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- for tree -->
+    
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://unpkg.com/treeflex/dist/css/treeflex.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tree.css' %}">
+    
+    
+    <!-- end tree -->
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script>
 if(!!window.performance && window.performance.navigation.type == 2)
 {
     window.location.reload();
 }
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
 
-body {
-  font-family: "Lato", sans-serif;
-}
+	<style type="text/css">
+		.navbar-nav li{
+			padding-right: 20x;
+		}
+		.nav-item{
+			padding-left: .7rem;
+			padding-right:.7rem;
+		}
+		.navbar{
+ 			padding: .8rem;
+		}
+		.nav-link{
+  			font-size: 1.1em !important;
+		}
+		.nav-item{
+ 			padding-left: .7rem;
+			padding-right:.7rem;
+		}
 
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 20px;
-}
+		.jumbo{
+			margin-top: 30px;
+		}
+		.small{
+			height: 60%;
+		}
+		.card{
+			float: left;
+			margin-left:80px;
+			margin-right:80px;	
+			margin-bottom: 80px;
+		}
+		.card-color{
+			color: black;
+		}
+	</style>
 
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
 
-.sidenav a:hover {
-  color: #f1f1f1;
-}
 
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-@media screen and (max-height: 600px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-
-.header{
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-background-color: #012e69;
-height:60px;
-text-align: center;
-font-size:40px;
-color:white;
-position: relative;
-
-}
-
-form{
-  align-items: center;
-  align-self: center;
-}
-
-.edit-css{
-  align-items: center;
-  align-self: center;
-}
-
-img{
-  width: 220px;
-  height: 360px;
-  align-self: center;
-  margin-left: 5%;
-  margin-right: 2%
-}
-
-.footer{
-  position: sticky;
-  margin-top: 80%;
-}
-
-.video{
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 20%;
-
-}
-
-  </style>
 </head>
-<body onunload="">
-  <div class="header">
-    One  stop
-  </div>
+<body>
+	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{% url 'home' %}"> LOGO Dashboard</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Welcome user</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Photo</a>
+					
+				</ul>
+			</div>
+			
+		</div>
+		
+	</nav>
 
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <br>
-  <img src="{{ us.img_link }}">
-  <br>
-  <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="edit-css">
-      <input type="file" name="myfile">
-      <button type="submit">Upload</button>
+<div class="container jumbo">
+	<div class="jumbotron">
+  		<h1 class="display-4">Hey There I'm Dashboard!</h1>
+  		<hr class="my-4">
+  		<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  		<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+	</div>		
+</div>
+
+<div class="bd-example">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'image/kaali.jpeg' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+        	<div class="card" style="width: 18rem;">
+  				<img src="{% static 'image/sem1.jpeg' %}" class="card-img-top" alt="...">
+ 			 	<div class="card-body">
+ 			 		<h5 class="card-title card-color">SEM1</h5>
+   					
+   					<a href="#" class="btn btn-primary">Go somewhere</a>
+  				</div>
+			</div>
+			<div class="card" style="width: 18rem;">
+  				<img src="{% static 'image/sem2.jpeg' %}" class="card-img-top" alt="...">
+ 			 	<div class="card-body">
+   					<h5 class="card-title card-color">SEM 2</h5>
+   					
+    				<a href="#" class="btn btn-primary">Go somewhere</a>
+  				</div>
+			</div>
+          
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'image/kaali.jpeg' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+         	<div class="card" style="width: 18rem;">
+  				<img src="{% static 'image/sem6.jpeg' %}" class="card-img-top" alt="...">
+ 			 	<div class="card-body">
+   					<h5 class="card-title card-color">SEM 3</h5>
+
+    				<a href="#" class="btn btn-primary">Go somewhere</a>
+  				</div>
+			</div>
+			<div class="card" style="width: 18rem;">
+  				<img src="{% static 'image/sem4.jpeg' %}" class="card-img-top" alt="...">
+ 			 	<div class="card-body">
+   					<h5 class="card-title card-color">SEM 4</h5>
+   					
+    				<a href="#" class="btn btn-primary">Go somewhere</a>
+  				</div>
+			</div>
+        </div>
+      </div>
     </div>
-    </form>
-  <a href=" {% url 'home' %}">Home</a>
-  <a href="{% url 'user-profile' user %}">Set Profile</a>
-  <a href=" {% url 'logout' %}">logout</a>
-
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 </div>
-
-<span style="font-size:30px;cursor:pointer;margin-left: 90%;" onclick="openNav()">&#9776;</span>
-
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-</script>
-
-
-<div class="content">
-  hello {{ user }} to your dashboard
+    <!-- start tree -->
+    
+    <div class="center">
+	<div class="tf-tree">
+	  <ul>
+	    <li>
+	      <span class="tf-nc">SERNIORS</span>
+	      <ul>
+	      	<li>
+	      		<span class="tf-nc">TECHNICAL</span>
+	      		<ul>
+	      			<li>
+	      				<span class="tf-nc">LANGUAGES</span>
+	      				<ul>
+	      					<li>
+	      						<span class="tf-nc">PYTHON</span>
+	      						<ul>
+	      							<li>
+	      								<span class="tf-nc"><a href="#">JAVA</a></span>
+	      								<ul>
+	      									<li>
+	      										<span class="tf-nc">JAVASCRIPT</span>
+	      									</li>
+	      								</ul>
+	      							</li>
+	      						</ul>
+	      					</li>
+	      				</ul>
+	      			</li>
+	        		<li><span class="tf-nc">FRAMEWORKS</span></li>
+	      		</ul>
+	      	</li>
+	        <li>
+	        	<span class="tf-nc">NON-TECHNICAL</span>
+	        	<ul>
+   					<li>
+   						<span class="tf-nc">raag</span>
+   						<ul>
+   							<li>
+   								<span class="tf-nc">malang</span>
+      								<ul>
+      									<li>
+      										<span class="tf-nc custom">drama</span>
+      									</li>
+      								</ul>
+   							</li>
+   						</ul>
+   					</li>
+   				</ul>
+	        </li>
+	      </ul>
+	    </li>
+	  </ul>
+	</div>
 </div>
-<div class="video">
-  <iframe  width="680" height="375" src="https://www.youtube.com/embed/rlR4PJn8b8I" frameborder="0" allowfullscreen></iframe>
-</div>
-<div class="footer">
-  gjhgjhgjhfijfdijf
-</div>
+    
+    <!-- end tree -->
+    
+    
 </body>
 </html>

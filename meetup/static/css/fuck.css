@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+/* start loader */
+.loader_bg{
+    position: fixed;
+    z-index: 999999;
+    background:#0e1111;
+    width:100%;
+    height:100%;
+}
+
+.loader{
+    border: 0 solid transparent;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: calc(50vh - 75px);
+    left: calc(50vw - 75px);
+}
+
+.loader:before, .loader:after{
+    content: "";
+    border: 1em solid #FFFFFF;
+    border-radius:50%;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top:0;
+    left:0;
+    animation: loader 2s linear infinite;
+    opacity: 0;
+}
+
+.loader:before{
+    animation-delay: .5s;
+}
+
+@keyframes loader{
+    0%{
+        transform: scale(0);
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+/* end loader */
+
+html,body{
+	height: 100%;
+	width: 100%;
+	font-family:sans-serif;
+	color: #222; 
+    background-color: #050301;
+}
+
+.parallax{
+	background-image: url("https://images.unsplash.com/photo-1496167117681-944f702be1f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80");
+	background-attachment: fixed;
+ 	background-position: center;
+	background-repeat: no-repeat;
+ 	background-size: cover;
+ 	width: 100%;
+	height: 90%;
+}
+
+.cont{
+			text-align: center;
+			font-size: 30px;
+		}
+
+.navbar{
+	padding: .7rem;
+}
+.navbar-nav li{
+	padding-right: 20x;
+}
+.nav-link{
+	font-size: 1.1em !important;
+}
+
+.carousel-inner img{
+	width:100%; 
+}
+
+.carousel-caption{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.carousel-caption h1{
+	font-size: 500%;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 15px #000;
+
+}
+.carousel-caption h3{
+	font-size: 200%;
+	font-weight: 500;
+	text-shadow: 1px 1px 10px #000;
+	padding-bottom: 1rem;
+}
+.one{
+	font-size: 50px;
+}
+.cost{
+    font-family: 'Merriweather', serif;
+}
+.video{
+    width:100%;
+}
+.marg{
+    margin:0;
+    border-radius: 0px;
+    border-bottom: 4px solid black;
+}
+.dark{
+    background-color: #050301;
+}
