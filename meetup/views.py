@@ -14,9 +14,12 @@ import datetime
 from hashing import *
 from django.core.mail import EmailMessage
 
+
+# for home page
 def index(request):
     return render(request,'home.html')
 
+# registeration form
 def Register(request):
     if request.method=='POST':
        form =RegisterForm(request.POST)
@@ -41,24 +44,16 @@ def Register(request):
            us.save()
            print("branch,curr_year",us.branch,us.curr_year)
 
-           return HttpResponseRedirect(reverse('confirm_regis',args=(name,)))
+           return HttpResponseRedirect(reverse('login_user'))
 
     else:
-        #proposed_date=datetime.date.today()+datetime.timedelta(weeks=3)
-
-        form=RegisterForm()
+        form=RegisterForm() # in case method is get simply display the form
     context={
     'form':form,
     }
 
 
     return render(request,'Register.html',context)
-
-def confirm(request,user):
-    context={
-    'user':user,
-    }
-    return render(request,'confirm_regis.html',context)
 
 def login(request):
    if request.session.get('name'):
@@ -206,7 +201,7 @@ def contact(request):
         print(request.POST['email'])
         a=request.POST['email']
         msg = EmailMessage('Message from ' + ' ' + a,
-                       request.POST['msg'], to=['**************@gmail.com'])
+                       request.POST['msg'], to=['iamdeveloper3553@gmail.com'])
         msg.send()
         print("mail sent")
     return HttpResponseRedirect(reverse('user-dashboard',args=(request.session.get('name'),)))
