@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from meetup.models import Register_user
-from meetup.forms import RegisterForm,LoginForm,UpdateForm
+from meetup.models import Register_user,Notice
+from meetup.forms import RegisterForm,LoginForm,UpdateForm,SetNoticeForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse,reverse_lazy
 from django.shortcuts import redirect
@@ -206,3 +206,42 @@ def contact(request):
         msg.send()
         print("mail sent")
     return HttpResponseRedirect(reverse('user-dashboard',args=(request.session.get('name'),)))
+
+
+
+def set_notice(request):
+    if request.method=='POST':
+        form =SetNoticeForm(request.POST)
+
+        if form.is_valid():
+            ls=Notice()
+            ls.event=form.cleaned_data['event']
+            ls.date=form.cleaned_data['date']
+            ls.time=form.cleaned_data['time']
+            ls.venue=form.cleaned_data['venue']
+            ls.save()
+            return HttpResponseRedirect(reverse('show_event'))
+
+    else:
+            form=SetNoticeForm()
+    context={
+    'form':form,
+    }
+    return render(request,'set_notice.html',context=context)
+
+def show_event(request):
+    ns=Notice.objects.all()
+    context={
+    'ns':ns
+    }
+
+    return render(request,'show_event.html',context)
+
+
+
+def delete_event(request,id):
+    try:
+        Notice.objects.filter(id=id).delete()
+    except:
+        pass
+    return HttpResponseRedirect(reverse('show_event'))
