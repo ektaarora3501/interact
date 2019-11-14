@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Showing current notice (admin )</title>
+  </head>
+  <body>
+    {% for us in ns %}
+      {{ us.event }}
+      {% if us.date %}
+        {{ us.date }}
+      {% endif %}
+      {% if us.time %}
+        {{ us.time }}
+      {% endif %}
+      {% if us.venue %}
+        {{ us.venue }}
+      {% endif %}
+     <a href="{% url 'delete_event' us.id%}">Remove<a>
+
+      {% endfor %}
+  </body>
+</html>

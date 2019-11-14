@@ -1,83 +1,109 @@
-<html>
-<head>
-  <title>
-  Login form
-  </title>
-  <style>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  .field{
-    color: blue;
-    align: center;
-    margin-left: 40%;
-    margin-right: auto;
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>register page</title>
+    <style>
 
-  }
-  .error{
-    color:red;
-  }
+.hii{
+  height: 700px;
 
-
-.header{
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  background-color:cyan;
-  height:60px;
-  text-align: center;
-  font-size:40px;
-  color:white;
-
-
-  }
-
-  .home{
-  background-color: #ce93d8;
-  height:35px;
-  }
-
-  font{
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    font-size:20px;
-  }
-
-  sup{
-    color: #6A5ACD;
-  }
-
-.body{
-  margin-top: 5%;
 }
-  </style>
-</head>
-<body>
-  <div class="header">
-  </div>
-  <form action="" method="post" >
-    <div class="container">
-     <div class="body">
-    {% csrf_token %}
-  {% for field in form %}
-    <div class="row">
-       <div class="col-md-2">
-         <div class="field">
-        {{ field.label_tag }}
-         <br>{{ field }} 
-        {% if field.help_text %}
-          <sup>{{ field.help_text }}</sup>
-        {% endif %}
-        <div class="error">
-        {{ field.errors }}
+.trans{
+    background-color:rgba(0, 0, 0, 0.685);
+    padding:40px 40px;
+    width: 800px;
+    color:rgb(230, 247, 225);
+    margin-top: 30px;
+}
+.dark{
+    background-color: #050301;
+}
+    </style>
+
+  </head>
+
+
+
+
+  <body>
+<div style="background-image : url(https://cdn.pixabay.com/photo/2016/12/14/04/08/thunderbolt-1905603_960_720.png);">
+
+      <nav class="navbar navbar-expand-md navbar-dark dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">LOGO</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login_user' %}">Sign In</a>
+          </li>
+        </ul>
       </div>
 
-       </div>
-</div>
-       </div>
- {% endfor %}
- <div class="field">
-   <br>
-  <input type="submit" value="Submit">
+    </div>
 
-</div>
-</div>
-</div>
-  </form>
-</body>
+  </nav>
+
+      <div style="background-image : url(https://cdn.pixabay.com/photo/2016/12/14/04/08/thunderbolt-1905603_960_720.png);">
+
+<div class="hii">
+<div class="container trans">
+
+  <form action="" method="post" >
+          <div class="form-group">
+      {% csrf_token %}
+    {% for field in form %}
+      <div class="row">
+         <div class="col-md-2">
+          <label for="exampleInputEmail1">{{ field.label_tag }}</label>
+           <!div class="form-control" id="exampleInputEmail1">
+           <br>{{ field }}
+         <!/div>
+          {% if field.help_text %}
+            <sup>{{ field.help_text }}</sup>
+          {% endif %}
+          <div class="error">
+          {{ field.errors }}
+        </div>
+
+         </div>
+  </div>
+         </div>
+   {% endfor %}
+   <div class="field">
+     <br>
+    <input type="submit" value="Submit">
+
+  </div>
+  </div>
+  </div>
+    </form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  </div>
+  </body>
 </html>
