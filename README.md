@@ -17,7 +17,7 @@ After creating database as the above step follow the below commands
  In mysql shell create a database using command 
  
  ```bash
- mysql> CREATE DATABASAE 'db name';
+ mysql> CREATE DATABASE 'db name';
  ```
  4.Configure database for adding tables
  In the terminal shell write the command 
