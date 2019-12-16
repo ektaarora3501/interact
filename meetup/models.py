@@ -29,12 +29,17 @@ class Register_user(models.Model):
         return f'{self.first_name},{self.email}'
 
 
-class Notice(models.Model):
+class Event(models.Model):
     event=models.CharField(max_length=100)
     date=models.CharField(max_length=100,null=True)
     time=models.CharField(max_length=100,null=True)
     venue=models.CharField(max_length=100,null=True)
 
+    def __str__(self):
+        return f'{self.event},{self.date},{self.time},{self.venue}'
+
+class Notice(models.Model):
+    notice=models.CharField(max_length=200)
 
     def __str__(self):
-        return f'{self.event},{self.date}'
+        return f'{self.notice}``'

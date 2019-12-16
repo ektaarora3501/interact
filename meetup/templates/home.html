@@ -199,6 +199,28 @@ position: static;
 		</div>
 	</div>
 
+
+	<!-- Notice Board -->
+	<div class="container-fluid row">
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-box">
+					<h4>Events</h4>	
+					<iframe id="encoder_iframe" height=100% width="100%" src="{% url 'show_event' %}"></iframe>				
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-box">
+					<h4>Notices</h4>
+					<iframe id="encoder_iframe" height=100% width="100%" src="{% url 'show_notice' %}"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
 	<!-- welcome section -->
 	<div class="container-fluid">
 		

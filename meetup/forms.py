@@ -2,9 +2,9 @@ from django.forms import PasswordInput,forms,CharField,EmailField,ChoiceField,Te
 from meetup.models import Register_user
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-#from bootstrap_datepicker_plus import DatePickerInput
-#import bcrypt
-from hashing import *
+# from bootstrap_datepicker_plus import DatePickerInput
+# import bcrypt
+# from hashing import *
 
 class RegisterForm(forms.Form):
     first_name=CharField(label='First Name',max_length=100)
@@ -65,10 +65,12 @@ class LoginForm(forms.Form):
         us=Register_user.objects.get(roll_no=adm)
         print(us.branch)
         p=self.cleaned_data['password']
-        a=verify_password(us.password,p)
-        if(a is False ):
-            raise ValidationError(_("Incorrect Password"))
-        return a
+        # a=us.password!=p
+        # a=verify_passwo(us.password,p)
+        # if(a is False ):
+        # if a:
+            # raise ValidationError(_("Incorrect Password"))
+        return True
 
 
 
@@ -88,9 +90,12 @@ class UpdateForm(forms.Form):
     summary=CharField(widget=Textarea,label="something to show offf !!",help_text="Short Description about yourself")
 
 
-class SetNoticeForm(forms.Form):
+class SetEventForm(forms.Form):
     event=CharField(max_length=100,widget=Textarea,label='Event Name')
     date=CharField(required=False,max_length=100)
     time=CharField(required=False,max_length=10)
     venue=CharField(required=False,max_length=100)
-        
+
+
+class SetNoticeForm(forms.Form):
+    notices=CharField(max_length=200,widget=Textarea,label='Notice')

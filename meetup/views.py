@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from meetup.models import Register_user,Notice
-from meetup.forms import RegisterForm,LoginForm,UpdateForm,SetNoticeForm
+from meetup.models import Register_user,Notice,Event
+from meetup.forms import RegisterForm,LoginForm,UpdateForm,SetNoticeForm,SetEventForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse,reverse_lazy
 from django.shortcuts import redirect
@@ -11,8 +11,8 @@ from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
 from django.conf import settings
 import datetime
-from hashing import *
-from django.core.mail import EmailMessage
+# from hashing import *
+# from django.core.mail import EmailMessage
 
 
 # for home page
@@ -39,7 +39,7 @@ def Register(request):
            us.curr_year=form.cleaned_data['curr_year']
            us.roll_no=form.cleaned_data['adm_no']
            user=form.cleaned_data['password']
-           us.password=hash_password(user)                     #done by me
+           # us.password=hash_password(user)                     #done by me
            print(us.password)
            us.save()
            print("branch,curr_year",us.branch,us.curr_year)
@@ -215,10 +215,7 @@ def set_notice(request):
 
         if form.is_valid():
             ls=Notice()
-            ls.event=form.cleaned_data['event']
-            ls.date=form.cleaned_data['date']
-            ls.time=form.cleaned_data['time']
-            ls.venue=form.cleaned_data['venue']
+            ls.notice=form.cleaned_data['notice']
             ls.save()
             return HttpResponseRedirect(reverse('show_event'))
 
@@ -229,12 +226,33 @@ def set_notice(request):
     }
     return render(request,'set_notice.html',context=context)
 
+
+def set_event(request):
+    if request.method=='POST':
+        form =SetEventForm(request.POST)
+
+        if form.is_valid():
+            ls=Event()
+            ls.event=form.cleaned_data['event']
+            ls.date=form.cleaned_data['date']
+            ls.time=form.cleaned_data['time']
+            ls.venue=form.cleaned_data['venue']
+            ls.save()
+            return HttpResponseRedirect(reverse('show_event'))
+
+    else:
+            form=SetEventForm()
+    context={
+    'form':form,
+    }
+    return render(request,'set_event.html',context=context)
+
+
 def show_event(request):
-    ns=Notice.objects.all()
+    ns=Event.objects.all()
     context={
     'ns':ns
     }
-
     return render(request,'show_event.html',context)
 
 

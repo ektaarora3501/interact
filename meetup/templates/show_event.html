@@ -2,22 +2,28 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Showing current notice (admin )</title>
+    <title>Showing current notice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
   </head>
-  <body>
+  <body class="jumbotron">
+    <div class="bg-danger text-white">
+      <h1>Hi there everyone</h1>
     {% for us in ns %}
-      {{ us.event }}
+      <h1>{{ us.event }}</h1>
       {% if us.date %}
-        {{ us.date }}
+        <h1>{{ us.date }}</h1>
       {% endif %}
       {% if us.time %}
-        {{ us.time }}
+        <h1>{{ us.time }}</h1>
       {% endif %}
       {% if us.venue %}
-        {{ us.venue }}
+        <h1>{{ us.venue }}</h1>
       {% endif %}
      <a href="{% url 'delete_event' us.id%}">Remove<a>
 
       {% endfor %}
+    </div>
   </body>
 </html>
